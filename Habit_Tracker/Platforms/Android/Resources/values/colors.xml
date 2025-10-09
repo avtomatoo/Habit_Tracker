@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	
-	<color name="activePurple">#6F42C1</color>
-    <color name="inactiveGrey">#ADB5BD</color>
-    <color name="backgroundWhite">#F0F2F5</color>
-    <color name="panelWhite">#F8F9FA</color>"
+	
 	
     <color name="colorPrimary">#512BD4</color>
     <color name="colorPrimaryDark">#2B0B98</color>
