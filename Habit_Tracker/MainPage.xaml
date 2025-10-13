@@ -1,39 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Habit_Tracker.MainPage"
-             Title="Главная">
-
-    <ContentPage.Resources>
-        <DataTemplate x:Key="EmptyTemplate">
-            <StackLayout HorizontalOptions="Center"
-                         VerticalOptions="Center"
-                         Padding="50">
-                <Label Text="У вас пока нет привычек"
-                       FontFamily="RobotoLight"
-                       TextColor="{StaticResource InactiveGrey}"
-                       FontSize="18"
-                       HorizontalOptions="Center"/>
-                <Label Text="Добавьте первую привычку, нажав кнопку ниже"
-                       FontFamily="RobotoLight"
-                       TextColor="{StaticResource InactiveGrey}"
-                       FontSize="14"
-                       HorizontalOptions="Center"/>
-            </StackLayout>
-        </DataTemplate>
-    </ContentPage.Resources>
+             x:Class="Habit_Tracker.MainPage">
 
     <Grid RowDefinitions="90, *, Auto, Auto"
           Padding="30,0">
 
-        <!-- Верхняя панель -->
+        <!-- Верхняя панель 393x90 -->
         <Grid Grid.Row="0"
               HeightRequest="90"
               WidthRequest="412"
               HorizontalOptions="Center"
               BackgroundColor="{StaticResource PanelWhite}">
 
-            <Label Text="Добро пожаловать!"
+            <Label Text="Добро пожаловать, Имя!"
                    FontFamily="RobotoRegular"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
@@ -42,7 +22,7 @@
 
         </Grid>
 
-        <!-- Центральная часть - список привычек -->
+        <!-- Центральная часть - для будущего списка привычек -->
         <ScrollView Grid.Row="1">
             <VerticalStackLayout>
                 <Label Text="Список привычек"
@@ -50,73 +30,12 @@
                        HorizontalOptions="Center"
                        TextColor="black"
                        FontSize="20"
-                       Margin="0,20,0,20"/>
-
-                <!-- Коллекция привычек -->
-                <CollectionView x:Name="HabitsCollectionView"
-                                EmptyView="У вас пока нет привычек. Добавьте первую!"
-                                EmptyViewTemplate="{StaticResource EmptyTemplate}">
-
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Padding="15,10"
-                                  ColumnDefinitions="*, Auto, Auto"
-                                  BackgroundColor="{StaticResource PanelWhite}"
-                                  Margin="0,0,0,10">
-
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-
-                                <!-- Название привычки -->
-                                <Label Grid.Row="0"
-                                       Grid.Column="0"
-                                       Text="{Binding Name}"
-                                       FontFamily="RobotoRegular"
-                                       TextColor="Black"
-                                       FontSize="18"
-                                       VerticalOptions="Center"/>
-
-                                <!-- Частота -->
-                                <Label Grid.Row="1"
-                                       Grid.Column="0"
-                                       Text="{Binding Frequency}"
-                                       FontFamily="RobotoLight"
-                                       TextColor="{StaticResource InactiveGrey}"
-                                       FontSize="14"
-                                       VerticalOptions="Center"/>
-
-                                <!-- Время напоминания -->
-                                <Label Grid.Row="1"
-                                       Grid.Column="1"
-                                       Text="{Binding DisplayTime}"
-                                       FontFamily="RobotoLight"
-                                       TextColor="{StaticResource InactiveGrey}"
-                                       FontSize="14"
-                                       VerticalOptions="Center"
-                                       Margin="0,0,10,0"/>
-
-                                <!-- Кнопка выполнения -->
-                                <Button Grid.Row="0"
-                                        Grid.RowSpan="2"
-                                        Grid.Column="2"
-                                        BackgroundColor="Transparent"
-                                        BorderWidth="0"
-                                        Clicked="OnHabitCompletedClicked">
-                                    <Button.ImageSource>
-                                        <FontImageSource Glyph="&#xE5CA;"
-                                                         FontFamily="MaterialDesignIcons"
-                                                         Color="{StaticResource ActivePurple}"
-                                                         Size="30"/>
-                                    </Button.ImageSource>
-                                </Button>
-
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-
+                       Margin="0,20,0,0"/>
+                <!-- Здесь будет ваш список привычек -->
+                <!-- Например: -->
+                <!-- <CollectionView> -->
+                <!--     ваш список -->
+                <!-- </CollectionView> -->
             </VerticalStackLayout>
         </ScrollView>
 
@@ -132,8 +51,8 @@
                 WidthRequest="293"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
-                Margin="0,0,0,25"
-                Clicked="OnAddHabitClicked">
+                Margin="0,0,0,25">
+            <!-- Отступ снизу 25px до панели навигации -->
 
             <Button.Shadow>
                 <Shadow Brush="#40000000"
