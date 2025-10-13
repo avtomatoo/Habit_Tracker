@@ -2,14 +2,12 @@
 {
     public partial class App : Application
     {
+        [Obsolete]
         public App()
         {
             InitializeComponent();
-        }
 
-        protected override Window CreateWindow(IActivationState? activationState)
-        {
-            return new Window(new AppShell());
+            MainPage = new NavigationPage(new MainPage());
         }
     }
 }
