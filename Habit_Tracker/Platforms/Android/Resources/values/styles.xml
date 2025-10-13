@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="Maui.MainTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+		<item name="colorPrimary">@color/maui_primary</item>
+		<item name="colorPrimaryDark">@color/maui_primary_dark</item>
+		<item name="colorAccent">@color/maui_accent</item>
+		<item name="android:windowBackground">@color/maui_window_background</item>
+	</style>
+</resources>

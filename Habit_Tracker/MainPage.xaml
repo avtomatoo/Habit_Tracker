@@ -3,34 +3,107 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Habit_Tracker.MainPage">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
-            
+    <Grid RowDefinitions="Auto, *, Auto, Auto"
+          Padding="30,0">
 
-            <Label
-                Text="Добро пожаловать, Имя!"
-                FontFamily="RobotoRegular"
-                HorizontalOptions="Center"
-                TextColor="{StaticResource ActivePurple}"
-                FontSize="22"/>
+        <!-- Верхняя часть - приветствие -->
+        <VerticalStackLayout Grid.Row="0"
+                            Spacing="25"
+                            Padding="0,30,0,0">
 
-            <Label
-                Text="Список привычек"
-                FontFamily="RobotoRegular"
-                HorizontalOptions="Center"
-                TextColor="black"
-                FontSize="20"
-                />
+            <Label Text="Добро пожаловать, Имя!"
+                   FontFamily="RobotoRegular"
+                   HorizontalOptions="Center"
+                   TextColor="{StaticResource ActivePurple}"
+                   FontSize="22"/>
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me" 
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Fill" />
+            <Label Text="Список привычек"
+                   FontFamily="RobotoRegular"
+                   HorizontalOptions="Center"
+                   TextColor="black"
+                   FontSize="20" />
+
         </VerticalStackLayout>
-    </ScrollView>
+
+        <!-- Центральная часть - для будущего списка привычек -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout>
+                <!-- Здесь будет ваш список привычек -->
+                <!-- Например: -->
+                <!-- <CollectionView> -->
+                <!--     ваш список -->
+                <!-- </CollectionView> -->
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Кнопка добавления привычки -->
+        <Button Grid.Row="2"
+                Text="Добавить новую привычку"
+                FontFamily="RobotoLight"
+                FontSize="20"
+                BackgroundColor="{StaticResource PanelWhite}"
+                TextColor="{StaticResource ActivePurple}"
+                CornerRadius="10"
+                HeightRequest="60"
+                WidthRequest="293"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Margin="0,0,0,25">
+            <!-- Отступ снизу 25px до панели навигации -->
+
+            <Button.Shadow>
+                <Shadow Brush="#40000000"
+                        Offset="0,5"
+                        Radius="2"
+                        Opacity="0.3"/>
+            </Button.Shadow>
+        </Button>
+
+        <!-- Панель навигации -->
+        <Grid Grid.Row="3"
+              BackgroundColor="{StaticResource PanelWhite}"
+              HeightRequest="60"
+              Padding="20,0"
+              ColumnDefinitions="*, *, *">
+
+            <!-- Первая иконка -->
+            <Button Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    BorderWidth="0">
+                <Button.ImageSource>
+                    <FontImageSource Glyph="&#xE80F;"
+                                     FontFamily="MaterialDesignIcons"
+                                     Color="{StaticResource ActivePurple}"
+                                     Size="30"/>
+                </Button.ImageSource>
+            </Button>
+
+            <!-- Вторая иконка -->
+            <Button Grid.Column="1"
+                    BackgroundColor="Transparent"
+                    BorderWidth="0">
+                <Button.ImageSource>
+                    <FontImageSource Glyph="&#xE9D2;"
+                                     FontFamily="MaterialDesignIcons"
+                                     Color="{StaticResource ActivePurple}"
+                                     Size="30"/>
+                </Button.ImageSource>
+            </Button>
+
+            <!-- Третья иконка -->
+            <Button Grid.Column="2"
+                    BackgroundColor="Transparent"
+                    BorderWidth="0">
+                <Button.ImageSource>
+                    <FontImageSource Glyph="&#xE853;"
+                                     FontFamily="MaterialDesignIcons"
+                                     Color="{StaticResource ActivePurple}"
+                                     Size="30"/>
+                </Button.ImageSource>
+            </Button>
+
+        </Grid>
+
+    </Grid>
 
 </ContentPage>
