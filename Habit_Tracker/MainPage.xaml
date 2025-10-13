@@ -3,31 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Habit_Tracker.MainPage">
 
-    <Grid RowDefinitions="Auto, *, Auto, Auto"
+    <Grid RowDefinitions="90, *, Auto, Auto"
           Padding="30,0">
 
-        <!-- Верхняя часть - приветствие -->
-        <VerticalStackLayout Grid.Row="0"
-                            Spacing="25"
-                            Padding="0,30,0,0">
+        <!-- Верхняя панель 393x90 -->
+        <Grid Grid.Row="0"
+              HeightRequest="90"
+              WidthRequest="412"
+              HorizontalOptions="Center"
+              BackgroundColor="{StaticResource PanelWhite}">
 
             <Label Text="Добро пожаловать, Имя!"
                    FontFamily="RobotoRegular"
                    HorizontalOptions="Center"
+                   VerticalOptions="Center"
                    TextColor="{StaticResource ActivePurple}"
                    FontSize="22"/>
 
-            <Label Text="Список привычек"
-                   FontFamily="RobotoRegular"
-                   HorizontalOptions="Center"
-                   TextColor="black"
-                   FontSize="20" />
-
-        </VerticalStackLayout>
+        </Grid>
 
         <!-- Центральная часть - для будущего списка привычек -->
         <ScrollView Grid.Row="1">
             <VerticalStackLayout>
+                <Label Text="Список привычек"
+                       FontFamily="RobotoRegular"
+                       HorizontalOptions="Center"
+                       TextColor="black"
+                       FontSize="20"
+                       Margin="0,20,0,0"/>
                 <!-- Здесь будет ваш список привычек -->
                 <!-- Например: -->
                 <!-- <CollectionView> -->
@@ -62,7 +65,8 @@
         <!-- Панель навигации -->
         <Grid Grid.Row="3"
               BackgroundColor="{StaticResource PanelWhite}"
-              HeightRequest="60"
+              HeightRequest="90"
+              WidthRequest="412"
               Padding="20,0"
               ColumnDefinitions="*, *, *">
 
@@ -73,8 +77,8 @@
                 <Button.ImageSource>
                     <FontImageSource Glyph="&#xE80F;"
                                      FontFamily="MaterialDesignIcons"
-                                     Color="{StaticResource ActivePurple}"
-                                     Size="30"/>
+                                     Color="{StaticResource InactiveGrey}"
+                                     Size="40"/>
                 </Button.ImageSource>
             </Button>
 
@@ -86,7 +90,7 @@
                     <FontImageSource Glyph="&#xE9D2;"
                                      FontFamily="MaterialDesignIcons"
                                      Color="{StaticResource ActivePurple}"
-                                     Size="30"/>
+                                     Size="40"/>
                 </Button.ImageSource>
             </Button>
 
@@ -97,8 +101,8 @@
                 <Button.ImageSource>
                     <FontImageSource Glyph="&#xE853;"
                                      FontFamily="MaterialDesignIcons"
-                                     Color="{StaticResource ActivePurple}"
-                                     Size="30"/>
+                                     Color="{StaticResource InactiveGrey}"
+                                     Size="40"/>
                 </Button.ImageSource>
             </Button>
 
