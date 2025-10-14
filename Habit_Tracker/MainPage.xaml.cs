@@ -65,6 +65,7 @@ namespace Habit_Tracker
             {
                 await _database.DeleteHabitAsync(habit);
                 Habits.Remove(habit);
+
                 await DisplayAlert("Успех", "Привычка удалена!", "OK");
             }
         }

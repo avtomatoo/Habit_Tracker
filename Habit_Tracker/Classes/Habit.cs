@@ -7,19 +7,19 @@ namespace Habit_Tracker
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        
+
         public string Name { get; set; }
         public string Frequency { get; set; }
         public TimeSpan ReminderTime { get; set; }
         public DateTime CreationDate { get; set; }
-        
+
         // Новые поля для отслеживания выполнения
         public DateTime LastCompletedDate { get; set; }
         public int CompletionCount { get; set; }
-        
+
         // Вычисляемые свойства для отображения
         public string DisplayTime => ReminderTime.ToString(@"hh\:mm");
-        
+
         private bool _isCompletedToday;
         public bool IsCompletedToday
         {
@@ -32,29 +32,29 @@ namespace Habit_Tracker
                 OnPropertyChanged(nameof(CompletionText));
             }
         }
-        
+
         // Цвет кнопки выполнения
-        public string StatusColor => IsCompletedToday ? "#9E9E9E" : "#6F42C1"; // InactiveGrey : ActivePurple
-        
+        public string StatusColor => IsCompletedToday ? "#9E9E9E" : "#9C27B0";
+
         // Текст кнопки выполнения
         public string CompletionText => IsCompletedToday ? "Отмечено" : "Отметить";
-        
+
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        
+
         // Метод для проверки, можно ли выполнить привычку сегодня
         public bool CanCompleteToday()
         {
             var today = DateTime.Today;
-            
+
             // Если уже выполнено сегодня
             if (IsCompletedToday)
                 return false;
-                
+
             return Frequency switch
             {
                 "Ежедневно" => true,
@@ -66,7 +66,7 @@ namespace Habit_Tracker
                 _ => true
             };
         }
-        
+
         // Метод для выполнения привычки
         public void MarkCompleted()
         {
@@ -74,7 +74,7 @@ namespace Habit_Tracker
             CompletionCount++;
             IsCompletedToday = true;
         }
-        
+
         // Метод для сброса выполнения (на следующий день)
         public void ResetCompletion()
         {
