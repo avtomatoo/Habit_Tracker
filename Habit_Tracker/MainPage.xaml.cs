@@ -13,6 +13,8 @@ namespace Habit_Tracker
             InitializeComponent();
             _database = new HabitDatabase();
             Habits = new ObservableCollection<Habit>();
+
+            // ВАЖНО: Установите ItemsSource
             HabitsCollectionView.ItemsSource = Habits;
 
             LoadHabits();
@@ -26,12 +28,22 @@ namespace Habit_Tracker
 
         private async void LoadHabits()
         {
-            var habits = await _database.GetHabitsAsync();
-
-            Habits.Clear();
-            foreach (var habit in habits)
+            try
             {
-                Habits.Add(habit);
+                var habits = await _database.GetHabitsAsync();
+
+                Habits.Clear();
+                foreach (var habit in habits)
+                {
+                    Habits.Add(habit);
+                }
+
+                // Для отладки - проверьте количество элементов
+                System.Diagnostics.Debug.WriteLine($"Загружено привычек: {Habits.Count}");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка загрузки привычек: {ex.Message}");
             }
         }
 
@@ -40,7 +52,7 @@ namespace Habit_Tracker
             await Navigation.PushAsync(new CreatePage());
         }
 
-        private async void OnHabitCompletedClicked(object sender, EventArgs e)
+        private async void OnHabitDeleteClicked(object sender, EventArgs e)
         {
             var button = (Button)sender;
             var habit = (Habit)button.BindingContext;

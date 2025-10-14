@@ -19,7 +19,8 @@ namespace Habit_Tracker
                     fonts.AddFont("Roboto-Light.ttf", "RobotoLight");
                     fonts.AddFont("Roboto-VariableFont_wdth,wght.ttf", "RobotoVariableFontWdthWght");
                     fonts.AddFont("Roboto-Italic-VariableFont_wdth,wght.ttf", "RobotoItalicVariableFontWdthWght");
-                });
+
+        });
 
 #if DEBUG
     		builder.Logging.AddDebug();

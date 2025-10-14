@@ -104,7 +104,7 @@
                                         Grid.Column="2"
                                         BackgroundColor="Transparent"
                                         BorderWidth="0"
-                                        Clicked="OnHabitCompletedClicked">
+                                        Clicked="OnHabitDeleteClicked">
                                     <Button.ImageSource>
                                         <FontImageSource Glyph="&#xE5CA;"
                                                          FontFamily="MaterialDesignIcons"
