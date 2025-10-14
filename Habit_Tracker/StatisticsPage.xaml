@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Habit_Tracker.StatisticsPage"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid RowDefinitions="90, *, Auto"
+          Padding="30,0">
+
+        <!-- Верхняя панель -->
+        <Grid Grid.Row="0"
+              HeightRequest="90"
+              WidthRequest="412"
+              HorizontalOptions="Center"
+              BackgroundColor="{StaticResource PanelWhite}">
+
+            <Label Text="Статистика привычек"
+                   FontFamily="RobotoRegular"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   TextColor="{StaticResource ActivePurple}"
+                   FontSize="24"/>
+
+        </Grid>
+
+        <!-- Карусель статистики по привычкам -->
+        <CarouselView x:Name="StatisticsCarouselView"
+                      Grid.Row="1"
+                      HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand">
+
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <ScrollView>
+                        <VerticalStackLayout Spacing="20"
+                                             Padding="20">
+
+                            <!-- Название привычки -->
+                            <Label Text="{Binding Name}"
+                                   FontFamily="RobotoRegular"
+                                   HorizontalOptions="Center"
+                                   TextColor="{StaticResource ActivePurple}"
+                                   FontSize="26"
+                                   Margin="0,0,0,10"/>
+
+                            <!-- Основная статистика -->
+                            <Grid ColumnDefinitions="*, *"
+                                  RowDefinitions="Auto, Auto, Auto"
+                                  RowSpacing="15"
+                                  ColumnSpacing="20"
+                                  BackgroundColor="{StaticResource PanelWhite}"
+                                  Padding="20">
+
+                                <!-- Привычка существует -->
+                                <Label Grid.Row="0"
+                                       Grid.Column="0"
+                                       Text="Привычка существует:"
+                                       FontFamily="RobotoLight"
+                                       TextColor="{StaticResource InactiveGrey}"
+                                       FontSize="16"/>
+                                <Label Grid.Row="0"
+                                       Grid.Column="1"
+                                       Text="{Binding DaysExists}"
+                                       FontFamily="RobotoRegular"
+                                       TextColor="Black"
+                                       FontSize="16"
+                                       HorizontalOptions="End"/>
+
+                                <!-- Выполнено раз -->
+                                <Label Grid.Row="1"
+                                       Grid.Column="0"
+                                       Text="Выполнено раз:"
+                                       FontFamily="RobotoLight"
+                                       TextColor="{StaticResource InactiveGrey}"
+                                       FontSize="16"/>
+                                <Label Grid.Row="1"
+                                       Grid.Column="1"
+                                       Text="{Binding CompletionCount}"
+                                       FontFamily="RobotoRegular"
+                                       TextColor="Black"
+                                       FontSize="16"
+                                       HorizontalOptions="End"/>
+
+                                <!-- Процент успеха -->
+                                <Label Grid.Row="2"
+                                       Grid.Column="0"
+                                       Text="Процент успеха:"
+                                       FontFamily="RobotoLight"
+                                       TextColor="{StaticResource InactiveGrey}"
+                                       FontSize="16"/>
+                                <Label Grid.Row="2"
+                                       Grid.Column="1"
+                                       Text="{Binding SuccessRate}"
+                                       FontFamily="RobotoRegular"
+                                       TextColor="Black"
+                                       FontSize="16"
+                                       HorizontalOptions="End"/>
+
+                            </Grid>
+
+                            <!-- Еженедельная статистика -->
+                            <VerticalStackLayout Spacing="15"
+                                                 BackgroundColor="{StaticResource PanelWhite}"
+                                                 Padding="20">
+
+                                <Label Text="Статистика за неделю"
+                                       FontFamily="RobotoRegular"
+                                       HorizontalOptions="Center"
+                                       TextColor="{StaticResource ActivePurple}"
+                                       FontSize="18"
+                                       Margin="0,0,0,10"/>
+
+                                <!-- Простая визуализация -->
+                                <Grid ColumnDefinitions="*, *, *, *, *, *, *"
+                                      RowDefinitions="Auto, 100, Auto"
+                                      ColumnSpacing="5"
+                                      HorizontalOptions="Center"
+                                      VerticalOptions="Center">
+
+                                    <!-- Дни недели -->
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Пн" FontSize="12" HorizontalOptions="Center"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="Вт" FontSize="12" HorizontalOptions="Center"/>
+                                    <Label Grid.Row="0" Grid.Column="2" Text="Ср" FontSize="12" HorizontalOptions="Center"/>
+                                    <Label Grid.Row="0" Grid.Column="3" Text="Чт" FontSize="12" HorizontalOptions="Center"/>
+                                    <Label Grid.Row="0" Grid.Column="4" Text="Пт" FontSize="12" HorizontalOptions="Center"/>
+                                    <Label Grid.Row="0" Grid.Column="5" Text="Сб" FontSize="12" HorizontalOptions="Center"/>
+                                    <Label Grid.Row="0" Grid.Column="6" Text="Вс" FontSize="12" HorizontalOptions="Center"/>
+
+                                    <!-- Столбцы графика -->
+                                    <BoxView Grid.Row="1" Grid.Column="0" 
+                                             HeightRequest="{Binding MondayHeight}"
+                                             BackgroundColor="{StaticResource ActivePurple}"
+                                             VerticalOptions="End"/>
+                                    <BoxView Grid.Row="1" Grid.Column="1"
+                                             HeightRequest="{Binding TuesdayHeight}"
+                                             BackgroundColor="{StaticResource ActivePurple}"
+                                             VerticalOptions="End"/>
+                                    <BoxView Grid.Row="1" Grid.Column="2"
+                                             HeightRequest="{Binding WednesdayHeight}"
+                                             BackgroundColor="{StaticResource ActivePurple}"
+                                             VerticalOptions="End"/>
+                                    <BoxView Grid.Row="1" Grid.Column="3"
+                                             HeightRequest="{Binding ThursdayHeight}"
+                                             BackgroundColor="{StaticResource ActivePurple}"
+                                             VerticalOptions="End"/>
+                                    <BoxView Grid.Row="1" Grid.Column="4"
+                                             HeightRequest="{Binding FridayHeight}"
+                                             BackgroundColor="{StaticResource ActivePurple}"
+                                             VerticalOptions="End"/>
+                                    <BoxView Grid.Row="1" Grid.Column="5"
+                                             HeightRequest="{Binding SaturdayHeight}"
+                                             BackgroundColor="{StaticResource ActivePurple}"
+                                             VerticalOptions="End"/>
+                                    <BoxView Grid.Row="1" Grid.Column="6"
+                                             HeightRequest="{Binding SundayHeight}"
+                                             BackgroundColor="{StaticResource ActivePurple}"
+                                             VerticalOptions="End"/>
+
+                                    <!-- Количество выполнений -->
+                                    <Label Grid.Row="2" Grid.Column="0" 
+                                           Text="{Binding MondayCount}"
+                                           FontSize="10" 
+                                           HorizontalOptions="Center"/>
+                                    <Label Grid.Row="2" Grid.Column="1"
+                                           Text="{Binding TuesdayCount}"
+                                           FontSize="10"
+                                           HorizontalOptions="Center"/>
+                                    <Label Grid.Row="2" Grid.Column="2"
+                                           Text="{Binding WednesdayCount}"
+                                           FontSize="10"
+                                           HorizontalOptions="Center"/>
+                                    <Label Grid.Row="2" Grid.Column="3"
+                                           Text="{Binding ThursdayCount}"
+                                           FontSize="10"
+                                           HorizontalOptions="Center"/>
+                                    <Label Grid.Row="2" Grid.Column="4"
+                                           Text="{Binding FridayCount}"
+                                           FontSize="10"
+                                           HorizontalOptions="Center"/>
+                                    <Label Grid.Row="2" Grid.Column="5"
+                                           Text="{Binding SaturdayCount}"
+                                           FontSize="10"
+                                           HorizontalOptions="Center"/>
+                                    <Label Grid.Row="2" Grid.Column="6"
+                                           Text="{Binding SundayCount}"
+                                           FontSize="10"
+                                           HorizontalOptions="Center"/>
+
+                                </Grid>
+
+                            </VerticalStackLayout>
+
+                            <!-- Дополнительная информация -->
+                            <VerticalStackLayout Spacing="10"
+                                                 BackgroundColor="{StaticResource PanelWhite}"
+                                                 Padding="20">
+
+                                <Label Text="Дополнительная информация"
+                                       FontFamily="RobotoRegular"
+                                       HorizontalOptions="Center"
+                                       TextColor="{StaticResource ActivePurple}"
+                                       FontSize="18"
+                                       Margin="0,0,0,10"/>
+
+                                <Label Text="{Binding FrequencyInfo}"
+                                       FontFamily="RobotoLight"
+                                       TextColor="Black"
+                                       FontSize="14"
+                                       HorizontalOptions="Center"/>
+
+                                <Label Text="{Binding CreationDateInfo}"
+                                       FontFamily="RobotoLight"
+                                       TextColor="{StaticResource InactiveGrey}"
+                                       FontSize="12"
+                                       HorizontalOptions="Center"/>
+
+                            </VerticalStackLayout>
+
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+
+        </CarouselView>
+
+        <!-- Панель навигации -->
+        <Grid Grid.Row="2"
+              BackgroundColor="{StaticResource PanelWhite}"
+              HeightRequest="90"
+              WidthRequest="412"
+              Padding="20,0"
+              ColumnDefinitions="*, *, *">
+
+            <!-- Первая иконка -->
+            <Button Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    BorderWidth="0"
+                    Clicked="OnHomeClicked">
+                <Button.ImageSource>
+                    <FontImageSource Glyph="&#xE80F;"
+                                     FontFamily="MaterialDesignIcons"
+                                     Color="{StaticResource ActivePurple}"
+                                     Size="40"/>
+                </Button.ImageSource>
+            </Button>
+
+            <!-- Вторая иконка -->
+            <Button Grid.Column="1"
+                    BackgroundColor="Transparent"
+                    BorderWidth="0"
+                    Clicked="OnHabitsClicked">
+                <Button.ImageSource>
+                    <FontImageSource Glyph="&#xE9D2;"
+                                     FontFamily="MaterialDesignIcons"
+                                     Color="{StaticResource InactiveGrey}"
+                                     Size="40"/>
+                </Button.ImageSource>
+            </Button>
+
+            <!-- Третья иконка -->
+            <Button Grid.Column="2"
+                    BackgroundColor="Transparent"
+                    BorderWidth="0"
+                    Clicked="OnSettingsClicked">
+                <Button.ImageSource>
+                    <FontImageSource Glyph="&#xE853;"
+                                     FontFamily="MaterialDesignIcons"
+                                     Color="{StaticResource InactiveGrey}"
+                                     Size="40"/>
+                </Button.ImageSource>
+            </Button>
+
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

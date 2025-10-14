@@ -43,7 +43,10 @@ namespace Habit_Tracker
                 System.Diagnostics.Debug.WriteLine($"Ошибка загрузки привычек: {ex.Message}");
             }
         }
-
+        private async void OnStatisticsClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new StatisticsPage());
+        }
         private async void OnAddHabitClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new CreatePage());

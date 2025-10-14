@@ -188,13 +188,14 @@
 
             <!-- Первая иконка -->
             <Button Grid.Column="0"
-                    BackgroundColor="Transparent"
-                    BorderWidth="0">
+                         BackgroundColor="Transparent"
+                         BorderWidth="0"
+                         Clicked="OnStatisticsClicked">
                 <Button.ImageSource>
                     <FontImageSource Glyph="&#xE80F;"
-                                     FontFamily="MaterialDesignIcons"
-                                     Color="{StaticResource InactiveGrey}"
-                                     Size="40"/>
+                         FontFamily="MaterialDesignIcons"
+                         Color="{StaticResource InactiveGrey}"
+                         Size="40"/>
                 </Button.ImageSource>
             </Button>
 
