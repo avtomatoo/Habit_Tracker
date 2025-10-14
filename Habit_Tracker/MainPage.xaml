@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Habit_Tracker"
              x:Class="Habit_Tracker.MainPage"
-             Title="Главная">
+             NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Resources>
-        <DataTemplate x:Key="EmptyTemplate">
+        <DataTemplate x:Key="EmptyTemplate" x:DataType="models:Habit">
             <StackLayout HorizontalOptions="Center"
                          VerticalOptions="Center"
                          Padding="50">
@@ -58,7 +59,7 @@
                                 EmptyViewTemplate="{StaticResource EmptyTemplate}">
 
                     <CollectionView.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="models:Habit">
                             <Grid Padding="15,10"
                                   ColumnDefinitions="*, Auto, Auto"
                                   BackgroundColor="{StaticResource PanelWhite}"

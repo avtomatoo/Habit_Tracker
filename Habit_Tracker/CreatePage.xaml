@@ -2,34 +2,42 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Habit_Tracker.CreatePage"
-             Title="Новая привычка">
+             NavigationPage.HasNavigationBar="False">
 
-    <Grid RowDefinitions="Auto, *, Auto"
-          Padding="30"
-          RowSpacing="20">
+    <Grid RowDefinitions="90, *, Auto"
+          Padding="30,0">
 
-        <!-- Заголовок -->
-        <Label Grid.Row="0"
-               Text="Создание привычки"
-               FontFamily="RobotoRegular"
-               HorizontalOptions="Center"
-               TextColor="{StaticResource ActivePurple}"
-               FontSize="24"
-               Margin="0,20,0,0"/>
+        <!-- Верхняя панель 412x90 -->
+        <Grid Grid.Row="0"
+              HeightRequest="90"
+              WidthRequest="412"
+              HorizontalOptions="Center"
+              BackgroundColor="{StaticResource PanelWhite}">
+
+            <Label Text="Создание привычки"
+                   FontFamily="RobotoRegular"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   TextColor="{StaticResource ActivePurple}"
+                   FontSize="24"/>
+
+        </Grid>
 
         <!-- Форма создания привычки -->
         <VerticalStackLayout Grid.Row="1"
                              Spacing="25"
-                             VerticalOptions="Center">
+                             VerticalOptions="Center"
+                             Padding="0,30">
 
             <!-- Поле названия привычки -->
             <VerticalStackLayout Spacing="8">
                 <Label Text="Название привычки"
                        FontFamily="RobotoRegular"
-                       TextColor="Black"
-                       FontSize="16"/>
+                       TextColor="{StaticResource ActivePurple}"
+                       HorizontalOptions="Center"
+                       FontSize="22"/>
                 <Entry x:Name="HabitNameEntry"
-                       Placeholder="Введите название привычки"
+                       Placeholder="Введите название привычки.."
                        FontFamily="RobotoLight"
                        FontSize="16"
                        HeightRequest="50"
@@ -48,11 +56,12 @@
             <VerticalStackLayout Spacing="8">
                 <Label Text="Частота напоминаний"
                        FontFamily="RobotoRegular"
-                       TextColor="Black"
-                       FontSize="16"/>
+                       TextColor="{StaticResource ActivePurple}"
+                       HorizontalOptions="Center"
+                       FontSize="22"/>
 
                 <Picker x:Name="FrequencyPicker"
-                        Title="Выберите частоту"
+                        Title="Выберите частоту.."
                         FontFamily="RobotoLight"
                         FontSize="16"
                         HeightRequest="50"
@@ -71,8 +80,9 @@
             <VerticalStackLayout Spacing="8">
                 <Label Text="Время напоминания"
                        FontFamily="RobotoRegular"
-                       TextColor="Black"
-                       FontSize="16"/>
+                       HorizontalOptions="Center"
+                       TextColor="{StaticResource ActivePurple}"
+                       FontSize="22"/>
                 <TimePicker x:Name="ReminderTimePicker"
                             FontFamily="RobotoLight"
                             FontSize="16"
@@ -92,7 +102,8 @@
         <Grid Grid.Row="2"
               ColumnDefinitions="*, *"
               ColumnSpacing="15"
-              HeightRequest="60">
+              HeightRequest="60"
+              Margin="0,0,0,25">
 
             <Button Grid.Column="0"
                     Text="Отмена"

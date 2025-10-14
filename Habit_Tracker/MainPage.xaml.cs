@@ -45,8 +45,8 @@ namespace Habit_Tracker
             var button = (Button)sender;
             var habit = (Habit)button.BindingContext;
 
-            bool answer = await DisplayAlert("Выполнение",
-                $"Отметить привычку \"{habit.Name}\" как выполненную?",
+            bool answer = await DisplayAlert("Удаление",
+                $"Удалить привычку \"{habit.Name}\"?",
                 "Да", "Нет");
 
             if (answer)
@@ -54,7 +54,7 @@ namespace Habit_Tracker
                 await _database.DeleteHabitAsync(habit);
                 Habits.Remove(habit);
 
-                await DisplayAlert("Успех", "Привычка выполнена!", "OK");
+                await DisplayAlert("Успех", "Привычка удалена!", "OK");
             }
         }
     }
