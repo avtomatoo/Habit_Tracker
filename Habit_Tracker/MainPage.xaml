@@ -6,7 +6,7 @@
              NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Resources>
-        <DataTemplate x:Key="EmptyTemplate" x:DataType="models:Habit">
+        <DataTemplate x:Key="EmptyTemplate">
             <StackLayout HorizontalOptions="Center"
                          VerticalOptions="Center"
                          Padding="50">
@@ -61,13 +61,14 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Habit">
                             <Grid Padding="15,10"
-                                  ColumnDefinitions="*, Auto, Auto"
+                                  ColumnDefinitions="*, Auto, Auto, Auto"
                                   BackgroundColor="{StaticResource PanelWhite}"
                                   Margin="0,0,0,10">
 
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
 
                                 <!-- Название привычки -->
@@ -79,7 +80,7 @@
                                        FontSize="18"
                                        VerticalOptions="Center"/>
 
-                                <!-- Частота -->
+                                <!-- Частота и статистика -->
                                 <Label Grid.Row="1"
                                        Grid.Column="0"
                                        Text="{Binding Frequency}"
@@ -98,20 +99,53 @@
                                        VerticalOptions="Center"
                                        Margin="0,0,10,0"/>
 
-                                <!-- Кнопка выполнения -->
+                                <!-- Кнопка удаления (мусорка) -->
                                 <Button Grid.Row="0"
                                         Grid.RowSpan="2"
                                         Grid.Column="2"
                                         BackgroundColor="Transparent"
                                         BorderWidth="0"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
+                                        WidthRequest="40"
+                                        HeightRequest="40"
+                                        Margin="0,0,5,0"
                                         Clicked="OnHabitDeleteClicked">
                                     <Button.ImageSource>
-                                        <FontImageSource Glyph="&#xE5CA;"
+                                        <FontImageSource Glyph="&#xF1D8;"
                                                          FontFamily="MaterialDesignIcons"
-                                                         Color="{StaticResource ActivePurple}"
-                                                         Size="30"/>
+                                                         Color="{StaticResource InactiveGrey}"
+                                                         Size="24"/>
                                     </Button.ImageSource>
                                 </Button>
+
+                                <!-- Кнопка выполнения -->
+                                <Button Grid.Row="0"
+                                        Grid.RowSpan="2"
+                                        Grid.Column="3"
+                                        Text="{Binding CompletionText}"
+                                        BackgroundColor="{Binding StatusColor}"
+                                        TextColor="White"
+                                        FontFamily="RobotoLight"
+                                        FontSize="12"
+                                        CornerRadius="15"
+                                        HeightRequest="30"
+                                        WidthRequest="90"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        Clicked="OnHabitCompleteClicked"
+                                        IsEnabled="{Binding CanCompleteToday}">
+                                </Button>
+
+                                <!-- Статистика выполнения -->
+                                <Label Grid.Row="2"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="4"
+                                       Text="{Binding CompletionCount, StringFormat='Выполнено раз: {0}'}"
+                                       FontFamily="RobotoLight"
+                                       TextColor="{StaticResource InactiveGrey}"
+                                       FontSize="12"
+                                       Margin="0,5,0,0"/>
 
                             </Grid>
                         </DataTemplate>

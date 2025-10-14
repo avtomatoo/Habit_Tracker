@@ -53,7 +53,9 @@ namespace Habit_Tracker
                 Frequency = FrequencyPicker.SelectedItem.ToString(),
                 ReminderTime = ReminderTimePicker.Time,
                 CreationDate = DateTime.Now,
-                IsCompleted = false
+                LastCompletedDate = DateTime.MinValue, // Никогда не выполнялась
+                CompletionCount = 0,
+                IsCompletedToday = false
             };
 
             // Сохраняем в базу данных

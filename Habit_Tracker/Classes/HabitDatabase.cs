@@ -61,5 +61,10 @@ InitializeDatabase()
                             .Where(x => x.Id == id)
                             .FirstOrDefaultAsync();
         }
+        public async Task<int> UpdateHabitAsync(Habit habit)
+        {
+            await InitializeDatabase();
+            return await _database.UpdateAsync(habit);
+        }
     }
 }
