@@ -34,7 +34,7 @@ namespace Habit_Tracker
         }
 
         // Цвет кнопки выполнения
-        public string StatusColor => IsCompletedToday ? "#9E9E9E" : "#9C27B0";
+        public string StatusColor => IsCompletedToday ? "#9E9E9E" : "#6F42C1";
 
         // Текст кнопки выполнения
         public string CompletionText => IsCompletedToday ? "Отмечено" : "Отметить";

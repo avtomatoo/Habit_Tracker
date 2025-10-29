@@ -25,12 +25,22 @@
 		<SupportedOSPlatformVersion>21.0</SupportedOSPlatformVersion>
 		<AndroidPackageFormat>apk</AndroidPackageFormat>
 
-		<!-- Убираем ненужные настройки для других платформ -->
+		<!-- ДОБАВИТЬ: Указываем явно версию Maui -->
+		<MauiVersion>9.0.5</MauiVersion>
+
+		<!-- ДОБАВИТЬ: Для решения проблемы с debuggable -->
+		<AndroidDebugMode>true</AndroidDebugMode>
+
+		<!-- УДАЛИТЬ: Старую ссылку на иконку если была где-то выше -->
 	</PropertyGroup>
 
 	<ItemGroup>
-		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<!-- App Icon - ПЕРЕНЕСЕНО В НАЧАЛО ItemGroup -->
+		<MauiIcon Include="Resources\AppIcon\hbicon.svg">
+			<ForegroundFile>Resources\AppIcon\hbicon_foreground.svg</ForegroundFile>
+			<BackgroundFile>Resources\AppIcon\hbicon_background.svg</BackgroundFile>
+			<Color>#6F42C1</Color>
+		</MauiIcon>
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
@@ -38,9 +48,6 @@
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
-		<MauiImage Update="Resources\Images\home_icon.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</MauiImage>
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -49,9 +56,7 @@
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <MauiXaml Remove="Resources\Images\home_icon.xaml" />
-	</ItemGroup>
+	<!-- УДАЛИТЬ: Дублирующую секцию MauiIcon которая была в конце -->
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
