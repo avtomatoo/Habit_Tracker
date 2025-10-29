@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
              xmlns:models="clr-namespace:Habit_Tracker"
              x:Class="Habit_Tracker.MainPage"
              NavigationPage.HasNavigationBar="False">
@@ -110,13 +111,10 @@
                                         WidthRequest="40"
                                         HeightRequest="40"
                                         Margin="0,0,5,0"
-                                        Clicked="OnHabitDeleteClicked">
-                                    <Button.ImageSource>
-                                        <FontImageSource Glyph="&#xF1D8;"
-                                                         FontFamily="MaterialDesignIcons"
-                                                         Color="{StaticResource InactiveGrey}"
-                                                         Size="24"/>
-                                    </Button.ImageSource>
+                                        Clicked="OnHabitDeleteClicked"
+                                        Text="🗑"
+                                        FontSize="15">
+                                    
                                 </Button>
 
                                 <!-- Кнопка выполнения -->
@@ -190,37 +188,25 @@
             <Button Grid.Column="0"
                          BackgroundColor="Transparent"
                          BorderWidth="0"
-                         Clicked="OnStatisticsClicked">
-                <Button.ImageSource>
-                    <FontImageSource Glyph="&#xE80F;"
-                         FontFamily="MaterialDesignIcons"
-                         Color="{StaticResource InactiveGrey}"
-                         Size="40"/>
-                </Button.ImageSource>
+                         Clicked="OnStatisticsClicked"
+                         Text="📊"
+                         FontSize="40">
             </Button>
 
             <!-- Вторая иконка -->
             <Button Grid.Column="1"
                     BackgroundColor="Transparent"
-                    BorderWidth="0">
-                <Button.ImageSource>
-                    <FontImageSource Glyph="&#xE9D2;"
-                                     FontFamily="MaterialDesignIcons"
-                                     Color="{StaticResource ActivePurple}"
-                                     Size="40"/>
-                </Button.ImageSource>
+                    BorderWidth="1"
+                    Text="🏠"
+                    FontSize="40">
             </Button>
 
             <!-- Третья иконка -->
             <Button Grid.Column="2"
                     BackgroundColor="Transparent"
-                    BorderWidth="0">
-                <Button.ImageSource>
-                    <FontImageSource Glyph="&#xE853;"
-                                     FontFamily="MaterialDesignIcons"
-                                     Color="{StaticResource InactiveGrey}"
-                                     Size="40"/>
-                </Button.ImageSource>
+                    BorderWidth="0"
+                    Text="👤"
+                    FontSize="40">
             </Button>
 
         </Grid>

@@ -235,39 +235,27 @@
             <Button Grid.Column="0"
                     BackgroundColor="Transparent"
                     BorderWidth="0"
-                    Clicked="OnHomeClicked">
-                <Button.ImageSource>
-                    <FontImageSource Glyph="&#xE80F;"
-                                     FontFamily="MaterialDesignIcons"
-                                     Color="{StaticResource ActivePurple}"
-                                     Size="40"/>
-                </Button.ImageSource>
+                    Clicked="OnHomeClicked"
+                    Text="📊"
+                    FontSize="40">
             </Button>
 
             <!-- Вторая иконка -->
             <Button Grid.Column="1"
                     BackgroundColor="Transparent"
                     BorderWidth="0"
-                    Clicked="OnHabitsClicked">
-                <Button.ImageSource>
-                    <FontImageSource Glyph="&#xE9D2;"
-                                     FontFamily="MaterialDesignIcons"
-                                     Color="{StaticResource InactiveGrey}"
-                                     Size="40"/>
-                </Button.ImageSource>
+                    Clicked="OnHabitsClicked"
+                    Text="🏠"
+                    FontSize="40">
             </Button>
 
             <!-- Третья иконка -->
             <Button Grid.Column="2"
                     BackgroundColor="Transparent"
                     BorderWidth="0"
-                    Clicked="OnSettingsClicked">
-                <Button.ImageSource>
-                    <FontImageSource Glyph="&#xE853;"
-                                     FontFamily="MaterialDesignIcons"
-                                     Color="{StaticResource InactiveGrey}"
-                                     Size="40"/>
-                </Button.ImageSource>
+                    Clicked="OnSettingsClicked"
+                    Text="👤"
+                    FontSize="40">
             </Button>
 
         </Grid>
