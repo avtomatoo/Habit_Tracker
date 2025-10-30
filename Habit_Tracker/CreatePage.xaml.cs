@@ -70,6 +70,9 @@ namespace Habit_Tracker
 
             if (result > 0)
             {
+                // Планируем уведомление для новой привычки
+                await newHabit.ScheduleNotification();
+
                 await DisplayAlert("Успех", $"Привычка \"{newHabit.Name}\" создана!", "OK");
                 await Navigation.PopAsync();
             }
@@ -167,3 +170,4 @@ namespace Habit_Tracker
         }
     }
 }
+

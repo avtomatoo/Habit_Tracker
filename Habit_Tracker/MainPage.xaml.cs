@@ -1,5 +1,7 @@
 ﻿using Microsoft.Maui.Controls;
 using System.Collections.ObjectModel;
+using Plugin.LocalNotification;
+using Microsoft.Maui.ApplicationModel;
 
 namespace Habit_Tracker
 {
@@ -7,6 +9,7 @@ namespace Habit_Tracker
     {
         private readonly HabitDatabase _database;
         public ObservableCollection<Habit> Habits { get; set; }
+        private bool _permissionChecked = false;
 
         public MainPage()
         {
@@ -18,13 +21,87 @@ namespace Habit_Tracker
             LoadHabits();
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
-            LoadHabits();
+
+            // Проверяем разрешения только при первом открытии
+            if (!_permissionChecked)
+            {
+                _permissionChecked = true;
+                await CheckNotificationPermission();
+            }
+
+            await LoadHabits();
+            await RescheduleAllNotifications();
         }
 
-        private async void LoadHabits()
+        private async Task CheckNotificationPermission()
+        {
+            try
+            {
+                // Проверяем статус разрешений
+                var status = await Permissions.CheckStatusAsync<Permissions.PostNotifications>();
+
+                // Если уведомления запрещены, показываем сообщение
+                if (status != PermissionStatus.Granted)
+                {
+                    await ShowNotificationInstruction();
+                }
+                // Если разрешены - ничего не делаем, уведомления будут работать автоматически
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка проверки разрешений: {ex.Message}");
+            }
+        }
+
+        private async Task ShowNotificationInstruction()
+        {
+            string instructions = GetPlatformSpecificInstructions();
+
+            await DisplayAlert(
+                "Уведомления отключены",
+                $"Включите уведомления в настройках, чтобы получать напоминания о привычках.\n\n{instructions}",
+                "Понятно"
+            );
+        }
+
+        private string GetPlatformSpecificInstructions()
+        {
+#if ANDROID
+            return "Как включить:\n" +
+                   "1. Настройки → Приложения\n" +
+                   "2. Найдите 'Habit Tracker'\n" +
+                   "3. Нажмите 'Уведомления'\n" +
+                   "4. Включите уведомления";
+#elif IOS
+            return "Как включить:\n" +
+                   "1. Настройки → Habit Tracker\n" +
+                   "2. Нажмите 'Уведомления'\n" +
+                   "3. Включите 'Разрешить уведомления'";
+#else
+            return "Перейдите в настройки устройства, найдите приложение 'Habit Tracker' и включите уведомления.";
+#endif
+        }
+
+        private async Task RescheduleAllNotifications()
+        {
+            try
+            {
+                var habits = await _database.GetHabitsAsync();
+                foreach (var habit in habits)
+                {
+                    await habit.ScheduleNotification();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при планировании уведомлений: {ex.Message}");
+            }
+        }
+
+        private async Task LoadHabits()
         {
             try
             {
@@ -41,8 +118,10 @@ namespace Habit_Tracker
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Ошибка загрузки привычек: {ex.Message}");
+                await DisplayAlert("Ошибка", "Не удалось загрузить привычки", "OK");
             }
         }
+
         private async void OnSettingsClicked(object sender, EventArgs e)
         {
             await DisplayAlert("Информация", "Раздел настроек в разработке", "OK");
@@ -50,7 +129,7 @@ namespace Habit_Tracker
 
         private async void OnHomeClicked(object sender, EventArgs e)
         {
-            // Уже на главное странице 
+            // Уже на главной странице 
             await DisplayAlert("Информация", "Вы уже на главной странице", "OK");
         }
 
@@ -58,6 +137,7 @@ namespace Habit_Tracker
         {
             await Navigation.PushAsync(new StatisticsPage());
         }
+
         private async void OnAddHabitClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new CreatePage());
@@ -74,6 +154,9 @@ namespace Habit_Tracker
 
             if (answer)
             {
+                // Отменяем уведомление перед удалением
+                habit.CancelNotification();
+
                 await _database.DeleteHabitAsync(habit);
                 Habits.Remove(habit);
 
@@ -110,6 +193,9 @@ namespace Habit_Tracker
             {
                 habit.MarkCompleted();
                 await _database.UpdateHabitAsync(habit);
+
+                // Перепланируем уведомление после выполнения
+                await habit.ScheduleNotification();
 
                 // Обновляем отображение
                 var index = Habits.IndexOf(habit);

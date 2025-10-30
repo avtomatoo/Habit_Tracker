@@ -41,7 +41,6 @@
                    VerticalOptions="Center"
                    TextColor="{StaticResource ActivePurple}"
                    FontSize="22"/>
-
         </Grid>
 
         <!-- Центральная часть - список привычек -->
