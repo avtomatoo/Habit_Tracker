@@ -197,6 +197,7 @@
             <Button Grid.Column="1"
                     BackgroundColor="Transparent"
                     BorderWidth="1"
+                    Clicked="OnHomeClicked"
                     Text="🏠"
                     FontSize="40">
             </Button>
@@ -205,6 +206,7 @@
             <Button Grid.Column="2"
                     BackgroundColor="Transparent"
                     BorderWidth="0"
+                    Clicked="OnSettingsClicked"
                     Text="👤"
                     FontSize="40">
             </Button>

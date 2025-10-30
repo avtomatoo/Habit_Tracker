@@ -40,10 +40,10 @@
 			<ForegroundFile>Resources\AppIcon\hbicon_foreground.svg</ForegroundFile>
 			<BackgroundFile>Resources\AppIcon\hbicon_background.svg</BackgroundFile>
 			<Color>#6F42C1</Color>
+			<TintColor>#FFFFFF</TintColor>
 		</MauiIcon>
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -54,6 +54,14 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\Splash\hbsplash.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiSplashScreen Include="Resources\Splash\hbsplash.svg" BaseSize="128,128" Color="#6F42C1"/>
 	</ItemGroup>
 
 	<!-- УДАЛИТЬ: Дублирующую секцию MauiIcon которая была в конце -->
